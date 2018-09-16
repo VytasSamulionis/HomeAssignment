@@ -55,10 +55,6 @@ namespace HomeAssignment
                         break;
                 }
             }
-            Console.WriteLine(configXml);
-            Console.WriteLine("Bundles: " + bundles.Count);
-            Console.WriteLine("Products: " + products.Count);
-            Console.WriteLine("Product rule (min_age, income): " + products["6"].rules[0].type + " " + products["6"].rules[1].type);
         }
 
         private void LoadBundle(XElement element)
