@@ -11,8 +11,8 @@ namespace HomeAssignment
 {
     public class Config
     {
-        public Dictionary<string, Bundle> bundles { get; private set; }
-        public Dictionary<string, Product> products { get; private set; }
+        public Dictionary<string, Bundle> Bundles { get; private set; }
+        public Dictionary<string, Product> Products { get; private set; }
 
         private const string BUNDLE_KEY = "bundle";
         private const string PRODUCT_KEY = "product";
@@ -31,14 +31,14 @@ namespace HomeAssignment
 
         public Config()
         {
-            bundles = new Dictionary<string, Bundle>();
-            products = new Dictionary<string, Product>();
+            Bundles = new Dictionary<string, Bundle>();
+            Products = new Dictionary<string, Product>();
         }
 
         public void Load(string configPath)
         {
-            bundles.Clear();
-            products.Clear();
+            Bundles.Clear();
+            Products.Clear();
             XElement configXml = XElement.Load(configPath);
             IEnumerator<XElement> elements = configXml.Elements().GetEnumerator();
             while (elements.MoveNext())
@@ -104,7 +104,7 @@ namespace HomeAssignment
                         break;
                 }
             }
-            bundles.Add(id, new Bundle(name, value, bundleProducts, bundleRules));
+            Bundles.Add(id, new Bundle(name, value, bundleProducts, bundleRules));
         }
 
         private void LoadProduct(XElement element)
@@ -147,7 +147,7 @@ namespace HomeAssignment
                         break;
                 }
             }
-            products.Add(id, new Product(name, isAccount, productRules));
+            Products.Add(id, new Product(name, isAccount, productRules));
         }
 
         private IRule LoadRule(XElement element)

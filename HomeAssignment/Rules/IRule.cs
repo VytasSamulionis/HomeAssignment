@@ -9,7 +9,7 @@ namespace HomeAssignment
 {
     public abstract class IRule
     {
-        public RuleType type
+        public RuleType Type
         {
             get { return _type; }
         }

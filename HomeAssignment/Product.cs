@@ -8,22 +8,22 @@ namespace HomeAssignment
 {
     public class Product
     {
-        public string name
+        public string Name
         {
             get { return _name; }
         }
-        public bool isAccount
+        public bool IsAccount
         {
             get { return _isAccount; }
         }
-        public List<IRule> rules
+        public List<IRule> Rules
         {
             get { return _rules; }
         }
 
-        private string _name = string.Empty;
-        private bool _isAccount = false;
-        private List<IRule> _rules = new List<IRule>();
+        private readonly string _name = string.Empty;
+        private readonly bool _isAccount = false;
+        private readonly List<IRule> _rules = new List<IRule>();
 
         public Product(string productName, bool isAccountProduct, List<IRule> productRules)
         {

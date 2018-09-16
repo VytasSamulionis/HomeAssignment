@@ -14,7 +14,7 @@ namespace HomeAssignment
         }
 
         private Product _product = null;
-        private string _productID = string.Empty;
+        private readonly string _productID = string.Empty;
 
         public ProductItem(Product product, string productID)
         {
@@ -24,7 +24,7 @@ namespace HomeAssignment
 
         public override string ToString()
         {
-            return _product.name;
+            return _product.Name;
         }
     }
 }

@@ -10,7 +10,7 @@ namespace HomeAssignment.Rules
     {
         public int age = 0;
 
-        private int _maxAge = 0;
+        private readonly int _maxAge = 0;
 
         public MaxAgeRule(int maxAge)
         {
@@ -20,7 +20,7 @@ namespace HomeAssignment.Rules
 
         public override bool Validate()
         {
-            return age >= _maxAge;
+            return age <= _maxAge;
         }
     }
 }

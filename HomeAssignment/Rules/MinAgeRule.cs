@@ -10,7 +10,7 @@ namespace HomeAssignment.Rules
     {
         public int age = 0;
 
-        private int _minAge = 0;
+        private readonly int _minAge = 0;
 
         public MinAgeRule(int minAge)
         {

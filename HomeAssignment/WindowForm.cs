@@ -31,11 +31,11 @@ namespace HomeAssignment
             while (enumerator.MoveNext())
             {
                 Product product = enumerator.Current.Value;
-                if (product.isAccount)
+                if (product.IsAccount)
                 {
                     RadioButton accountButton = new RadioButton
                     {
-                        Text = product.name,
+                        Text = product.Name,
                         AutoSize = true,
                         Enabled = false
                     };
@@ -63,8 +63,8 @@ namespace HomeAssignment
 
         private void QuestionsForm_Load(object sender, EventArgs e)
         {
-            PopulateProducts(_config.products);
-            PopulateBundles(_config.bundles);
+            PopulateProducts(_config.Products);
+            PopulateBundles(_config.Bundles);
         }
     }
 }

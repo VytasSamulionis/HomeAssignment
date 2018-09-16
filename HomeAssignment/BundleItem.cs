@@ -14,7 +14,7 @@ namespace HomeAssignment
         }
 
         private Bundle _bundle = null;
-        private string _bundleID = string.Empty;
+        private readonly string _bundleID = string.Empty;
 
         public BundleItem(Bundle bundle, string bundleID)
         {
@@ -24,7 +24,7 @@ namespace HomeAssignment
 
         public override string ToString()
         {
-            return _bundle.name;
+            return _bundle.Name;
         }
     }
 }

@@ -17,67 +17,67 @@ namespace HomeAssignment.UnitTests
         {
             Config config = new Config();
             config.Load("config.xml");
-            Assert.AreEqual(3, config.bundles.Count);
-            Assert.AreEqual(4, config.products.Count);
+            Assert.AreEqual(3, config.Bundles.Count);
+            Assert.AreEqual(4, config.Products.Count);
 
             Bundle bundle;
 
-            Assert.IsTrue(config.bundles.TryGetValue("0", out bundle));
-            Assert.AreEqual("Junior Saver", bundle.name);
-            Assert.AreEqual(1, bundle.products.Count);
-            Assert.AreEqual("2", bundle.products[0]);
-            Assert.AreEqual(1, bundle.rules.Count);
-            Assert.AreEqual(RuleType.MaxAge, bundle.rules[0].type);
-            Assert.AreEqual(0, bundle.value);
+            Assert.IsTrue(config.Bundles.TryGetValue("0", out bundle));
+            Assert.AreEqual("Junior Saver", bundle.Name);
+            Assert.AreEqual(1, bundle.Products.Count);
+            Assert.AreEqual("2", bundle.Products[0]);
+            Assert.AreEqual(1, bundle.Rules.Count);
+            Assert.AreEqual(RuleType.MaxAge, bundle.Rules[0].Type);
+            Assert.AreEqual(0, bundle.Value);
 
-            Assert.IsTrue(config.bundles.TryGetValue("1", out bundle));
-            Assert.AreEqual("Student", bundle.name);
-            Assert.AreEqual(3, bundle.products.Count);
-            Assert.AreEqual("3", bundle.products[0]);
-            Assert.AreEqual("4", bundle.products[1]);
-            Assert.AreEqual("5", bundle.products[2]);
-            Assert.AreEqual(2, bundle.rules.Count);
-            Assert.AreEqual(RuleType.MinAge, bundle.rules[0].type);
-            Assert.AreEqual(RuleType.Student, bundle.rules[1].type);
-            Assert.AreEqual(0, bundle.value);
+            Assert.IsTrue(config.Bundles.TryGetValue("1", out bundle));
+            Assert.AreEqual("Student", bundle.Name);
+            Assert.AreEqual(3, bundle.Products.Count);
+            Assert.AreEqual("3", bundle.Products[0]);
+            Assert.AreEqual("4", bundle.Products[1]);
+            Assert.AreEqual("5", bundle.Products[2]);
+            Assert.AreEqual(2, bundle.Rules.Count);
+            Assert.AreEqual(RuleType.MinAge, bundle.Rules[0].Type);
+            Assert.AreEqual(RuleType.Student, bundle.Rules[1].Type);
+            Assert.AreEqual(0, bundle.Value);
 
-            Assert.IsTrue(config.bundles.TryGetValue("2", out bundle));
-            Assert.AreEqual("Classic", bundle.name);
-            Assert.AreEqual(2, bundle.products.Count);
-            Assert.AreEqual("0", bundle.products[0]);
-            Assert.AreEqual("4", bundle.products[1]);
-            Assert.AreEqual(2, bundle.rules.Count);
-            Assert.AreEqual(RuleType.MinAge, bundle.rules[0].type);
-            Assert.AreEqual(RuleType.MinIncome, bundle.rules[1].type);
-            Assert.AreEqual(1, bundle.value);
+            Assert.IsTrue(config.Bundles.TryGetValue("2", out bundle));
+            Assert.AreEqual("Classic", bundle.Name);
+            Assert.AreEqual(2, bundle.Products.Count);
+            Assert.AreEqual("0", bundle.Products[0]);
+            Assert.AreEqual("4", bundle.Products[1]);
+            Assert.AreEqual(2, bundle.Rules.Count);
+            Assert.AreEqual(RuleType.MinAge, bundle.Rules[0].Type);
+            Assert.AreEqual(RuleType.MinIncome, bundle.Rules[1].Type);
+            Assert.AreEqual(1, bundle.Value);
 
             Product product;
 
-            Assert.IsTrue(config.products.TryGetValue("0", out product));
-            Assert.AreEqual("Current Account", product.name);
-            Assert.IsTrue(product.isAccount);
-            Assert.AreEqual(2, product.rules.Count);
-            Assert.AreEqual(RuleType.MinAge, product.rules[0].type);
-            Assert.AreEqual(RuleType.MinIncome, product.rules[1].type);
+            Assert.IsTrue(config.Products.TryGetValue("0", out product));
+            Assert.AreEqual("Current Account", product.Name);
+            Assert.IsTrue(product.IsAccount);
+            Assert.AreEqual(2, product.Rules.Count);
+            Assert.AreEqual(RuleType.MinAge, product.Rules[0].Type);
+            Assert.AreEqual(RuleType.MinIncome, product.Rules[1].Type);
 
-            Assert.IsTrue(config.products.TryGetValue("1", out product));
-            Assert.AreEqual("Junior Saver Account", product.name);
-            Assert.IsTrue(product.isAccount);
-            Assert.AreEqual(1, product.rules.Count);
-            Assert.AreEqual(RuleType.MaxAge, product.rules[0].type);
+            Assert.IsTrue(config.Products.TryGetValue("1", out product));
+            Assert.AreEqual("Junior Saver Account", product.Name);
+            Assert.IsTrue(product.IsAccount);
+            Assert.AreEqual(1, product.Rules.Count);
+            Assert.AreEqual(RuleType.MaxAge, product.Rules[0].Type);
 
-            Assert.IsTrue(config.products.TryGetValue("2", out product));
-            Assert.AreEqual("Student Account", product.name);
-            Assert.IsTrue(product.isAccount);
-            Assert.AreEqual(2, product.rules.Count);
-            Assert.AreEqual(RuleType.MinAge, product.rules[0].type);
-            Assert.AreEqual(RuleType.Student, product.rules[1].type);
+            Assert.IsTrue(config.Products.TryGetValue("2", out product));
+            Assert.AreEqual("Student Account", product.Name);
+            Assert.IsTrue(product.IsAccount);
+            Assert.AreEqual(2, product.Rules.Count);
+            Assert.AreEqual(RuleType.MinAge, product.Rules[0].Type);
+            Assert.AreEqual(RuleType.Student, product.Rules[1].Type);
 
-            Assert.IsTrue(config.products.TryGetValue("3", out product));
-            Assert.AreEqual("Debit Card", product.name);
-            Assert.IsFalse(product.isAccount);
-            Assert.AreEqual(1, product.rules.Count);
-            Assert.AreEqual(RuleType.IncludeOneOfProducts, product.rules[0].type);
+            Assert.IsTrue(config.Products.TryGetValue("3", out product));
+            Assert.AreEqual("Debit Card", product.Name);
+            Assert.IsFalse(product.IsAccount);
+            Assert.AreEqual(1, product.Rules.Count);
+            Assert.AreEqual(RuleType.IncludeOneOfProducts, product.Rules[0].Type);
         }
     }
 }

@@ -10,7 +10,7 @@ namespace HomeAssignment.Rules
     {
         public int income = 0;
 
-        private int _minIncome = 0;
+        private readonly int _minIncome = 0;
 
         public MinIncomeRule(int minIncome)
         {
