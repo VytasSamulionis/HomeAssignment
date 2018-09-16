@@ -1,6 +1,6 @@
 ﻿namespace HomeAssignment
 {
-    partial class QuestionsForm
+    partial class WindowForm
     {
         /// <summary>
         /// Required designer variable.
@@ -30,7 +30,7 @@
         {
             System.Windows.Forms.Label AgeLabel;
             System.Windows.Forms.Label IncomeLabel;
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Not selected");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Not selected");
             System.Windows.Forms.Label CurrentBundleLabel;
             System.Windows.Forms.Label ProductsLabel;
             System.Windows.Forms.Label BundleSelectionLabel;
@@ -38,17 +38,17 @@
             this.AgeTextBox = new System.Windows.Forms.TextBox();
             this.Questions = new System.Windows.Forms.GroupBox();
             this.AgeFeedbackLabel = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.IncomeFeedbackLabel = new System.Windows.Forms.Label();
             this.IncomeTextBox = new System.Windows.Forms.TextBox();
             this.StudentCheckBox = new System.Windows.Forms.CheckBox();
             this.RecommendButton = new System.Windows.Forms.Button();
             this.Customizations = new System.Windows.Forms.GroupBox();
             this.CurrentBundle = new System.Windows.Forms.TreeView();
             this.ProductList = new System.Windows.Forms.CheckedListBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.AccountsPanel = new System.Windows.Forms.Panel();
+            this.BundleSelection = new System.Windows.Forms.ComboBox();
             this.ApplyButton = new System.Windows.Forms.Button();
             this.InformationLabel = new System.Windows.Forms.Label();
+            this.AccountsContainer = new System.Windows.Forms.FlowLayoutPanel();
             AgeLabel = new System.Windows.Forms.Label();
             IncomeLabel = new System.Windows.Forms.Label();
             CurrentBundleLabel = new System.Windows.Forms.Label();
@@ -79,7 +79,7 @@
             // Questions
             // 
             this.Questions.Controls.Add(this.StudentCheckBox);
-            this.Questions.Controls.Add(this.label1);
+            this.Questions.Controls.Add(this.IncomeFeedbackLabel);
             this.Questions.Controls.Add(this.IncomeTextBox);
             this.Questions.Controls.Add(IncomeLabel);
             this.Questions.Controls.Add(this.AgeFeedbackLabel);
@@ -102,15 +102,15 @@
             this.AgeFeedbackLabel.Text = "Error:";
             this.AgeFeedbackLabel.Visible = false;
             // 
-            // label1
+            // IncomeFeedbackLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(16, 75);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(32, 13);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "Error:";
-            this.label1.Visible = false;
+            this.IncomeFeedbackLabel.AutoSize = true;
+            this.IncomeFeedbackLabel.Location = new System.Drawing.Point(16, 75);
+            this.IncomeFeedbackLabel.Name = "IncomeFeedbackLabel";
+            this.IncomeFeedbackLabel.Size = new System.Drawing.Size(32, 13);
+            this.IncomeFeedbackLabel.TabIndex = 5;
+            this.IncomeFeedbackLabel.Text = "Error:";
+            this.IncomeFeedbackLabel.Visible = false;
             // 
             // IncomeTextBox
             // 
@@ -153,7 +153,7 @@
             this.Customizations.Controls.Add(this.ApplyButton);
             this.Customizations.Controls.Add(Accounts);
             this.Customizations.Controls.Add(BundleSelectionLabel);
-            this.Customizations.Controls.Add(this.comboBox1);
+            this.Customizations.Controls.Add(this.BundleSelection);
             this.Customizations.Controls.Add(this.ProductList);
             this.Customizations.Controls.Add(ProductsLabel);
             this.Customizations.Location = new System.Drawing.Point(280, 36);
@@ -167,10 +167,10 @@
             // 
             this.CurrentBundle.Location = new System.Drawing.Point(850, 76);
             this.CurrentBundle.Name = "CurrentBundle";
-            treeNode1.Name = "Bundle";
-            treeNode1.Text = "Not selected";
+            treeNode2.Name = "Bundle";
+            treeNode2.Text = "Not selected";
             this.CurrentBundle.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode1});
+            treeNode2});
             this.CurrentBundle.Size = new System.Drawing.Size(232, 477);
             this.CurrentBundle.TabIndex = 5;
             // 
@@ -202,14 +202,14 @@
             this.ProductList.Size = new System.Drawing.Size(244, 289);
             this.ProductList.TabIndex = 2;
             // 
-            // comboBox1
+            // BundleSelection
             // 
-            this.comboBox1.Enabled = false;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(20, 67);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(212, 21);
-            this.comboBox1.TabIndex = 3;
+            this.BundleSelection.Enabled = false;
+            this.BundleSelection.FormattingEnabled = true;
+            this.BundleSelection.Location = new System.Drawing.Point(20, 67);
+            this.BundleSelection.Name = "BundleSelection";
+            this.BundleSelection.Size = new System.Drawing.Size(212, 21);
+            this.BundleSelection.TabIndex = 3;
             // 
             // BundleSelectionLabel
             // 
@@ -220,17 +220,9 @@
             BundleSelectionLabel.TabIndex = 4;
             BundleSelectionLabel.Text = "Bundle:";
             // 
-            // AccountsPanel
-            // 
-            this.AccountsPanel.AutoScroll = true;
-            this.AccountsPanel.Location = new System.Drawing.Point(1, 31);
-            this.AccountsPanel.Name = "AccountsPanel";
-            this.AccountsPanel.Size = new System.Drawing.Size(210, 347);
-            this.AccountsPanel.TabIndex = 4;
-            // 
             // Accounts
             // 
-            Accounts.Controls.Add(this.AccountsPanel);
+            Accounts.Controls.Add(this.AccountsContainer);
             Accounts.Location = new System.Drawing.Point(20, 103);
             Accounts.Name = "Accounts";
             Accounts.Size = new System.Drawing.Size(212, 381);
@@ -256,7 +248,16 @@
             this.InformationLabel.TabIndex = 7;
             this.InformationLabel.Text = "Give answers to the questions and click on the \"Recommend\" button.";
             // 
-            // QuestionsForm
+            // AccountsContainer
+            // 
+            this.AccountsContainer.AutoSize = true;
+            this.AccountsContainer.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.AccountsContainer.Location = new System.Drawing.Point(1, 32);
+            this.AccountsContainer.Name = "AccountsContainer";
+            this.AccountsContainer.Size = new System.Drawing.Size(210, 347);
+            this.AccountsContainer.TabIndex = 0;
+            // 
+            // WindowForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -267,13 +268,15 @@
             this.Controls.Add(this.Customizations);
             this.Controls.Add(this.RecommendButton);
             this.Controls.Add(this.Questions);
-            this.Name = "QuestionsForm";
-            this.Text = "Questionnaire";
+            this.Name = "WindowForm";
+            this.Text = "Bundle Recommendation";
+            this.Load += new System.EventHandler(this.QuestionsForm_Load);
             this.Questions.ResumeLayout(false);
             this.Questions.PerformLayout();
             this.Customizations.ResumeLayout(false);
             this.Customizations.PerformLayout();
             Accounts.ResumeLayout(false);
+            Accounts.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -283,17 +286,17 @@
         private System.Windows.Forms.TextBox AgeTextBox;
         private System.Windows.Forms.GroupBox Questions;
         private System.Windows.Forms.CheckBox StudentCheckBox;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label IncomeFeedbackLabel;
         private System.Windows.Forms.TextBox IncomeTextBox;
         private System.Windows.Forms.Label AgeFeedbackLabel;
         private System.Windows.Forms.Button RecommendButton;
         private System.Windows.Forms.GroupBox Customizations;
         private System.Windows.Forms.TreeView CurrentBundle;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox BundleSelection;
         private System.Windows.Forms.CheckedListBox ProductList;
-        private System.Windows.Forms.Panel AccountsPanel;
         private System.Windows.Forms.Button ApplyButton;
         private System.Windows.Forms.Label InformationLabel;
+        private System.Windows.Forms.FlowLayoutPanel AccountsContainer;
     }
 }
 

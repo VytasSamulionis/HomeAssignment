@@ -16,9 +16,11 @@ namespace HomeAssignment
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new QuestionsForm());
+            WindowForm form = new WindowForm();
             Config config = new Config();
             config.Load("config.xml");
+            form.SetConfig(config);
+            Application.Run(form);
         }
     }
 }

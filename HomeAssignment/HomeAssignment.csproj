@@ -47,15 +47,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bundle.cs" />
+    <Compile Include="BundleItem.cs" />
     <Compile Include="Config.cs" />
+    <Compile Include="ProductItem.cs" />
     <Compile Include="Rules\IncludeOneOfProductsRule.cs" />
     <Compile Include="Rules\IRule.cs" />
     <Compile Include="Product.cs" />
-    <Compile Include="QuestionsForm.cs">
+    <Compile Include="WindowForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="QuestionsForm.Designer.cs">
-      <DependentUpon>QuestionsForm.cs</DependentUpon>
+    <Compile Include="WindowForm.Designer.cs">
+      <DependentUpon>WindowForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -73,8 +75,8 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="QuestionsForm.resx">
-      <DependentUpon>QuestionsForm.cs</DependentUpon>
+    <EmbeddedResource Include="WindowForm.resx">
+      <DependentUpon>WindowForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
