@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace HomeAssignment
 {
-    public partial class Form1 : Form
+    public partial class QuestionsForm : Form
     {
-        public Form1()
+        public QuestionsForm()
         {
             InitializeComponent();
         }
