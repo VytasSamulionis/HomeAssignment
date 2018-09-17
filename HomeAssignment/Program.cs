@@ -18,9 +18,16 @@ namespace HomeAssignment
             Application.SetCompatibleTextRenderingDefault(false);
             WindowForm form = new WindowForm();
             Config config = new Config();
-            config.Load("config.xml");
-            form.SetConfig(config);
-            Application.Run(form);
+            try
+            {
+                config.Load("config.xml");
+                form.SetConfig(config);
+                Application.Run(form);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("config.xml file is either corrupted or missing. Application will shut down.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
