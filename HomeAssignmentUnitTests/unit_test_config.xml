@@ -1,0 +1,68 @@
+<config>
+	<bundle id="0">
+		<name>Junior Saver</name>
+		<products>
+			<product_id>2</product_id>
+		</products>
+		<rules>
+			<max_age>17</max_age>
+		</rules>
+		<value>0</value>
+	</bundle>
+	<bundle id="1">
+		<name>Student</name>
+		<products>
+			<product_id>3</product_id>
+			<product_id>4</product_id>
+			<product_id>5</product_id>
+		</products>
+		<rules>
+			<min_age>18</min_age>
+			<student/>
+		</rules>
+		<value>0</value>
+	</bundle>
+	<bundle id="2">
+		<name>Classic</name>
+		<products>
+			<product_id>0</product_id>
+			<product_id>4</product_id>
+		</products>
+		<rules>
+			<min_age>18</min_age>
+			<min_income>1</min_income>
+		</rules>
+		<value>1</value>
+	</bundle>
+
+	<product id="0" account="1">
+		<name>Current Account</name>
+		<rules>
+			<min_age>18</min_age>
+			<min_income>1</min_income>
+		</rules>
+	</product>
+	<product id="1" account="1">
+		<name>Junior Saver Account</name>
+		<rules>
+			<max_age>17</max_age>
+		</rules>
+	</product>
+	<product id="2" account="1">
+		<name>Student Account</name>
+		<rules>
+			<min_age>18</min_age>
+			<student/>
+		</rules>
+	</product>
+	<product id="3" account="0">
+		<name>Debit Card</name>
+		<rules>
+			<include_one_of_products>
+				<product_id>0</product_id>
+				<product_id>1</product_id>
+				<product_id>3</product_id>
+			</include_one_of_products>
+		</rules>
+	</product>
+</config>

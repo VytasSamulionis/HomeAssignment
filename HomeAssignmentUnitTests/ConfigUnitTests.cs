@@ -16,7 +16,7 @@ namespace HomeAssignment.UnitTests
         public void LoadUnitTest()
         {
             Config config = new Config();
-            config.Load("config.xml");
+            config.Load("unit_test_config.xml");
             Assert.AreEqual(3, config.Bundles.Count);
             Assert.AreEqual(4, config.Products.Count);
 

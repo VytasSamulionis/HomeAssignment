@@ -15,7 +15,7 @@ namespace HomeAssignment.UnitTests
         public void ValidateUnitTest()
         {
             Config config = new Config();
-            config.Load("config.xml");
+            config.Load("unit_test_config.xml");
             // MaxAgeRule validation
             Assert.IsTrue(RulesValidator.Validate(config.Bundles["0"].Rules, 15, false, 0, null));
             Assert.IsFalse(RulesValidator.Validate(config.Bundles["0"].Rules, 18, false, 0, null));
