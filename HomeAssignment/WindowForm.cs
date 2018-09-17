@@ -14,6 +14,7 @@ namespace HomeAssignment
     {
         private Config _config = null;
         private BundleRecommendation _bundleRecommendation = null;
+        private bool _isCustomizationEnabled = false;
 
         private const string NAN_ERROR = "Error: The value has to be a number.";
         private const string ABNORMAL_AGE_WARNING = "Warning: Age number is abnormally high.";
@@ -90,6 +91,7 @@ namespace HomeAssignment
                 AgeFeedbackLabel.ForeColor = Color.DarkRed;
                 AgeFeedbackLabel.Visible = true;
                 AgeTextBox.BackColor = Color.OrangeRed;
+                SetCustomizationEnabled(false);
             }
             else if (age < 0)
             {
@@ -97,6 +99,7 @@ namespace HomeAssignment
                 AgeFeedbackLabel.ForeColor = Color.DarkRed;
                 AgeFeedbackLabel.Visible = true;
                 AgeTextBox.BackColor = Color.OrangeRed;
+                SetCustomizationEnabled(false);
             }
             else if (age > 130)
             {
@@ -130,6 +133,7 @@ namespace HomeAssignment
                 IncomeFeedbackLabel.ForeColor = Color.DarkRed;
                 IncomeFeedbackLabel.Visible = true;
                 IncomeTextBox.BackColor = Color.OrangeRed;
+                SetCustomizationEnabled(false);
             }
             else if (income < 0)
             {
@@ -137,6 +141,7 @@ namespace HomeAssignment
                 IncomeFeedbackLabel.ForeColor = Color.DarkRed;
                 IncomeFeedbackLabel.Visible = true;
                 IncomeTextBox.BackColor = Color.OrangeRed;
+                SetCustomizationEnabled(false);
             }
             else
             {
@@ -161,9 +166,80 @@ namespace HomeAssignment
                 }
                 else
                 {
-                    InformationLabel.Text = string.Format(RECOMMENDED_BUNDLE, _config.Bundles[recommendedBundle].Name);
+                    Bundle bundle = _config.Bundles[recommendedBundle];
+                    InformationLabel.Text = string.Format(RECOMMENDED_BUNDLE, bundle.Name);
+                    SetupBundle(recommendedBundle, bundle);
+                    UpdateCurrentBundle();
+                }
+                SetCustomizationEnabled(true);
+            }
+        }
+
+        private void SetCustomizationEnabled(bool enabled)
+        {
+            if (_isCustomizationEnabled != enabled)
+            {
+                BundleSelection.Enabled = enabled;
+                for (int i = 0; i < AccountsContainer.Controls.Count; ++i)
+                {
+                    AccountsContainer.Controls[i].Enabled = enabled;
+                }
+                ProductList.Enabled = enabled;
+                ApplyButton.Enabled = enabled;
+                _isCustomizationEnabled = enabled;
+            }
+        }
+
+        private void SetupBundle(string bundleID, Bundle bundle)
+        {
+            for (int i = 0; i < BundleSelection.Items.Count; ++i)
+            {
+                if (((BundleItem)BundleSelection.Items[i]).BundleID == bundleID)
+                {
+                    BundleSelection.SelectedIndex = i;
+                    break;
                 }
             }
+            for (int i = 0; i < AccountsContainer.Controls.Count; ++i)
+            {
+                string productID = ((ProductItem)AccountsContainer.Controls[i].Tag).ProductID;
+                if (bundle.Products.Contains(productID))
+                {
+                    AccountsContainer.Controls[i].Select();
+                    // a customer can only have one account so we can stop
+                    break;
+                }
+            }
+            ProductList.BeginUpdate();
+            for (int i = 0; i < ProductList.Items.Count; ++i)
+            {
+                string productID = ((ProductItem)ProductList.Items[i]).ProductID;
+                ProductList.SetItemChecked(i, bundle.Products.Contains(productID));
+            }
+            ProductList.EndUpdate();
+        }
+
+        private void UpdateCurrentBundle()
+        {
+            CurrentBundle.BeginUpdate();
+            CurrentBundle.Nodes.Clear();
+            TreeNode root = CurrentBundle.Nodes.Add(BundleSelection.Text);
+            for (int i = 0; i < AccountsContainer.Controls.Count; ++i)
+            {
+                RadioButton radioButton = (RadioButton)AccountsContainer.Controls[i];
+                if (radioButton.Checked)
+                {
+                    root.Nodes.Add(radioButton.Text);
+                    break;
+                }
+            }
+            var checkedItems = ProductList.CheckedItems.GetEnumerator();
+            while (checkedItems.MoveNext())
+            {
+                root.Nodes.Add(checkedItems.Current.ToString());
+            }
+            root.ExpandAll();
+            CurrentBundle.EndUpdate();
         }
     }
 }

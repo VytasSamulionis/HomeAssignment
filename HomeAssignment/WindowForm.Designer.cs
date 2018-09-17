@@ -34,7 +34,7 @@
             System.Windows.Forms.Label ProductsLabel;
             System.Windows.Forms.Label BundleSelectionLabel;
             System.Windows.Forms.GroupBox Accounts;
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Not selected");
+            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Not selected");
             this.AccountsContainer = new System.Windows.Forms.FlowLayoutPanel();
             this.AgeTextBox = new System.Windows.Forms.TextBox();
             this.Questions = new System.Windows.Forms.GroupBox();
@@ -226,6 +226,7 @@
             // 
             // BundleSelection
             // 
+            this.BundleSelection.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.BundleSelection.Enabled = false;
             this.BundleSelection.FormattingEnabled = true;
             this.BundleSelection.Location = new System.Drawing.Point(20, 67);
@@ -247,10 +248,10 @@
             // 
             this.CurrentBundle.Location = new System.Drawing.Point(850, 76);
             this.CurrentBundle.Name = "CurrentBundle";
-            treeNode6.Name = "Bundle";
-            treeNode6.Text = "Not selected";
+            treeNode7.Name = "Bundle";
+            treeNode7.Text = "Not selected";
             this.CurrentBundle.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode6});
+            treeNode7});
             this.CurrentBundle.Size = new System.Drawing.Size(232, 477);
             this.CurrentBundle.TabIndex = 5;
             // 
