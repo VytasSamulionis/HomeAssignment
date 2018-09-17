@@ -17,7 +17,7 @@
 			<product_id>5</product_id>
 		</products>
 		<rules>
-			<min_age>17</min_age>
+			<min_age>18</min_age>
 			<student/>
 		</rules>
 		<value>0</value>
@@ -29,7 +29,7 @@
 			<product_id>4</product_id>
 		</products>
 		<rules>
-			<min_age>17</min_age>
+			<min_age>18</min_age>
 			<min_income>1</min_income>
 		</rules>
 		<value>1</value>
@@ -42,7 +42,7 @@
 			<product_id>5</product_id>
 		</products>
 		<rules>
-			<min_age>17</min_age>
+			<min_age>18</min_age>
 			<min_income>12001</min_income>
 		</rules>
 		<value>2</value>
@@ -55,7 +55,7 @@
 			<product_id>6</product_id>
 		</products>
 		<rules>
-			<min_age>17</min_age>
+			<min_age>18</min_age>
 			<min_income>40001</min_income>
 		</rules>
 		<value>3</value>

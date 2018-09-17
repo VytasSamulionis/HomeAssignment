@@ -9,6 +9,10 @@ namespace HomeAssignment.Rules
     public class IncludeOneOfProductsRule : IRule
     {
         public List<string> products = null;
+        public List<string> RequiredProducts
+        {
+            get { return _productsList; }
+        }
 
         private List<string> _productsList = null;
 
@@ -22,15 +26,18 @@ namespace HomeAssignment.Rules
         {
             if (products == null || _productsList == null)
             {
+                HasFailed = true;
                 return false;
             }
             for (int i = 0; i < products.Count; ++i)
             {
                 if (_productsList.Contains(products[i]))
                 {
+                    HasFailed = false;
                     return true;
                 }
             }
+            HasFailed = true;
             return false;
         }
     }

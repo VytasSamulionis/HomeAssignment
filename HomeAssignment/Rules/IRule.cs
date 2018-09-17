@@ -14,8 +14,16 @@ namespace HomeAssignment
             get { return _type; }
         }
 
+        public bool HasFailed
+        {
+            get { return _hasFailed; }
+            set { _hasFailed = value; }
+        }
+
         public abstract bool Validate();
 
         protected RuleType _type = RuleType.Undefined;
+
+        private bool _hasFailed = false;
     }
 }

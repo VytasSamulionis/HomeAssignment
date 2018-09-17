@@ -9,6 +9,10 @@ namespace HomeAssignment.Rules
     public class MinIncomeRule: IRule
     {
         public int income = 0;
+        public int MinIncome
+        {
+            get { return _minIncome; }
+        }
 
         private readonly int _minIncome = 0;
 
@@ -20,7 +24,8 @@ namespace HomeAssignment.Rules
 
         public override bool Validate()
         {
-            return income >= _minIncome;
+            HasFailed = income < _minIncome;
+            return !HasFailed;
         }
     }
 }

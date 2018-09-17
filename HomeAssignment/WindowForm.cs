@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using HomeAssignment.Rules;
 
 namespace HomeAssignment
 {
@@ -21,6 +22,16 @@ namespace HomeAssignment
         private const string NEGATIVE_NUMBER_ERROR = "Error: The value can't be a negative number.";
         private const string NO_BUNDLE_MATCH = "Unfortunately, none of the bundles can be recommended for this customer.";
         private const string RECOMMENDED_BUNDLE = "Recommended bundle:\n{0}\n\nNow you can customize the bundle.";
+
+        private const string ERROR_MAX_AGE = "{0} requires a customer to be less than {1} years old.";
+        private const string ERROR_MIN_AGE = "{0} requires a customer to be more than {1} years old.";
+        private const string ERROR_MIN_INCOME = "{0} requires that customer's income would be more than {1}.";
+        private const string ERROR_NOT_STUDENT = "{0} requires a customer to be a student.";
+        private const string ERROR_PRODUCT_IS_MISSING = "{0} requires a customer to have one of the following products: {1}";
+
+        private const string ERROR_CAPTION = "Error";
+        private const string BUNDLE_SENDER_FORMAT = "\"{0}\" bundle";
+        private const string PRODUCT_SENDER_FORMAT = "\"{0}\" product";
 
         public WindowForm()
         {
@@ -200,6 +211,121 @@ namespace HomeAssignment
                     break;
                 }
             }
+        }
+
+        private void UpdateCurrentBundle()
+        {
+            CurrentBundle.BeginUpdate();
+            CurrentBundle.Nodes.Clear();
+            TreeNode root = CurrentBundle.Nodes.Add(string.Format(BUNDLE_SENDER_FORMAT, BundleSelection.Text));
+            for (int i = 0; i < AccountsContainer.Controls.Count; ++i)
+            {
+                RadioButton radioButton = (RadioButton)AccountsContainer.Controls[i];
+                if (radioButton.Checked)
+                {
+                    root.Nodes.Add(radioButton.Text);
+                    break;
+                }
+            }
+            var checkedItems = ProductList.CheckedItems.GetEnumerator();
+            while (checkedItems.MoveNext())
+            {
+                root.Nodes.Add(checkedItems.Current.ToString());
+            }
+            root.ExpandAll();
+            CurrentBundle.EndUpdate();
+        }
+
+        private void ApplyButton_Click(object sender, EventArgs e)
+        {
+            int age = int.Parse(AgeTextBox.Text);
+            bool isStudent = StudentCheckBox.Checked;
+            int income = int.Parse(IncomeTextBox.Text);
+            BundleItem bundleItem = (BundleItem)BundleSelection.SelectedItem;
+            if (!RulesValidator.Validate(_config.Bundles[bundleItem.BundleID].Rules, age, isStudent, income, null))
+            {
+                Bundle bundle = _config.Bundles[bundleItem.BundleID];
+                string errorMessage = GetErrorMessage(bundle.Rules, string.Format(BUNDLE_SENDER_FORMAT, bundle.Name));
+                MessageBox.Show(errorMessage, ERROR_CAPTION, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            else
+            {
+                List<string> selectedProducts = new List<string>();
+                for (int i = 0; i < AccountsContainer.Controls.Count; ++i)
+                {
+                    RadioButton radioButton = (RadioButton)AccountsContainer.Controls[i];
+                    if (radioButton.Checked)
+                    {
+                        ProductItem productItem = (ProductItem)radioButton.Tag;
+                        selectedProducts.Add(productItem.ProductID);
+                        break;
+                    }
+                }
+                var checkedItems = ProductList.CheckedItems.GetEnumerator();
+                while (checkedItems.MoveNext())
+                {
+                    ProductItem productItem = (ProductItem)checkedItems.Current;
+                    selectedProducts.Add(productItem.ProductID);
+                }
+                for (int i = 0; i < selectedProducts.Count; ++i)
+                {
+                    Product product = _config.Products[selectedProducts[i]];
+                    if (!RulesValidator.Validate(product.Rules, age, isStudent, income, selectedProducts))
+                    {
+                        string errorMessage = GetErrorMessage(product.Rules, string.Format(PRODUCT_SENDER_FORMAT, product.Name));
+                        MessageBox.Show(errorMessage, ERROR_CAPTION, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                }
+            }
+            UpdateCurrentBundle();
+        }
+
+        private string GetErrorMessage(List<IRule> rules, string sender)
+        {
+            string message = string.Empty;
+            for (int i = 0; i < rules.Count; ++i)
+            {
+                if (rules[i].HasFailed)
+                {
+                    switch (rules[i].Type)
+                    {
+                        case RuleType.MaxAge:
+                            message = string.Format(ERROR_MAX_AGE, sender, ((MaxAgeRule)rules[i]).MaxAge + 1);
+                            break;
+                        case RuleType.MinAge:
+                            message = string.Format(ERROR_MIN_AGE, sender, ((MinAgeRule)rules[i]).MinAge - 1);
+                            break;
+                        case RuleType.MinIncome:
+                            message = string.Format(ERROR_MIN_INCOME, sender, ((MinIncomeRule)rules[i]).MinIncome - 1);
+                            break;
+                        case RuleType.Student:
+                            message = string.Format(ERROR_NOT_STUDENT, sender);
+                            break;
+                        case RuleType.IncludeOneOfProducts:
+                            string productList = string.Empty;
+                            var productsEnumerator = ((IncludeOneOfProductsRule)rules[i]).RequiredProducts.GetEnumerator();
+                            productsEnumerator.MoveNext();
+                            productList = _config.Products[productsEnumerator.Current].Name;
+                            while (productsEnumerator.MoveNext())
+                            {
+                                productList += ", " + _config.Products[productsEnumerator.Current].Name;
+                            }
+                            message = string.Format(ERROR_PRODUCT_IS_MISSING, sender, productList);
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                }
+            }
+            return message;
+        }
+
+        private void BundleSelection_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Bundle bundle = _config.Bundles[((BundleItem)((ComboBox)sender).SelectedItem).BundleID];
             for (int i = 0; i < AccountsContainer.Controls.Count; ++i)
             {
                 string productID = ((ProductItem)AccountsContainer.Controls[i].Tag).ProductID;
@@ -217,29 +343,6 @@ namespace HomeAssignment
                 ProductList.SetItemChecked(i, bundle.Products.Contains(productID));
             }
             ProductList.EndUpdate();
-        }
-
-        private void UpdateCurrentBundle()
-        {
-            CurrentBundle.BeginUpdate();
-            CurrentBundle.Nodes.Clear();
-            TreeNode root = CurrentBundle.Nodes.Add(BundleSelection.Text);
-            for (int i = 0; i < AccountsContainer.Controls.Count; ++i)
-            {
-                RadioButton radioButton = (RadioButton)AccountsContainer.Controls[i];
-                if (radioButton.Checked)
-                {
-                    root.Nodes.Add(radioButton.Text);
-                    break;
-                }
-            }
-            var checkedItems = ProductList.CheckedItems.GetEnumerator();
-            while (checkedItems.MoveNext())
-            {
-                root.Nodes.Add(checkedItems.Current.ToString());
-            }
-            root.ExpandAll();
-            CurrentBundle.EndUpdate();
         }
     }
 }

@@ -9,6 +9,10 @@ namespace HomeAssignment.Rules
     public class MinAgeRule: IRule
     {
         public int age = 0;
+        public int MinAge
+        {
+            get { return _minAge; }
+        }
 
         private readonly int _minAge = 0;
 
@@ -20,7 +24,8 @@ namespace HomeAssignment.Rules
 
         public override bool Validate()
         {
-            return age >= _minAge;
+            HasFailed = age < _minAge;
+            return !HasFailed;
         }
     }
 }

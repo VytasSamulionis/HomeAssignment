@@ -9,6 +9,10 @@ namespace HomeAssignment.Rules
     public class MaxAgeRule: IRule
     {
         public int age = 0;
+        public int MaxAge
+        {
+            get { return _maxAge; }
+        }
 
         private readonly int _maxAge = 0;
 
@@ -20,7 +24,8 @@ namespace HomeAssignment.Rules
 
         public override bool Validate()
         {
-            return age <= _maxAge;
+            HasFailed = age > _maxAge;
+            return !HasFailed;
         }
     }
 }

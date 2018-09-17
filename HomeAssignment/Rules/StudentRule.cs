@@ -17,7 +17,8 @@ namespace HomeAssignment.Rules
 
         public override bool Validate()
         {
-            return isStudent;
+            HasFailed = !isStudent;
+            return !HasFailed;
         }
     }
 }

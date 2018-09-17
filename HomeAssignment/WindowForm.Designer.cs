@@ -34,7 +34,7 @@
             System.Windows.Forms.Label ProductsLabel;
             System.Windows.Forms.Label BundleSelectionLabel;
             System.Windows.Forms.GroupBox Accounts;
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Not selected");
+            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Not selected");
             this.AccountsContainer = new System.Windows.Forms.FlowLayoutPanel();
             this.AgeTextBox = new System.Windows.Forms.TextBox();
             this.Questions = new System.Windows.Forms.GroupBox();
@@ -223,6 +223,7 @@
             this.ApplyButton.TabIndex = 6;
             this.ApplyButton.Text = "Apply";
             this.ApplyButton.UseVisualStyleBackColor = true;
+            this.ApplyButton.Click += new System.EventHandler(this.ApplyButton_Click);
             // 
             // BundleSelection
             // 
@@ -233,6 +234,7 @@
             this.BundleSelection.Name = "BundleSelection";
             this.BundleSelection.Size = new System.Drawing.Size(212, 21);
             this.BundleSelection.TabIndex = 3;
+            this.BundleSelection.SelectedIndexChanged += new System.EventHandler(this.BundleSelection_SelectedIndexChanged);
             // 
             // ProductList
             // 
@@ -248,10 +250,10 @@
             // 
             this.CurrentBundle.Location = new System.Drawing.Point(850, 76);
             this.CurrentBundle.Name = "CurrentBundle";
-            treeNode7.Name = "Bundle";
-            treeNode7.Text = "Not selected";
+            treeNode9.Name = "Bundle";
+            treeNode9.Text = "Not selected";
             this.CurrentBundle.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode7});
+            treeNode9});
             this.CurrentBundle.Size = new System.Drawing.Size(232, 477);
             this.CurrentBundle.TabIndex = 5;
             // 

@@ -23,29 +23,7 @@ namespace HomeAssignment
             while (enumerator.MoveNext())
             {
                 Bundle bundle = enumerator.Current.Value;
-                bool isEligibleBundle = true;
-                for (int i = 0; i < bundle.Rules.Count && isEligibleBundle; ++i)
-                {
-                    switch (bundle.Rules[i].Type)
-                    {
-                        case RuleType.MaxAge:
-                            ((MaxAgeRule)bundle.Rules[i]).age = age;
-                            break;
-                        case RuleType.MinAge:
-                            ((MinAgeRule)bundle.Rules[i]).age = age;
-                            break;
-                        case RuleType.MinIncome:
-                            ((MinIncomeRule)bundle.Rules[i]).income = income;
-                            break;
-                        case RuleType.Student:
-                            ((StudentRule)bundle.Rules[i]).isStudent = isStudent;
-                            break;
-                        default:
-                            break;
-                    }
-                    isEligibleBundle &= bundle.Rules[i].Validate();
-                }
-                if (isEligibleBundle)
+                if (RulesValidator.Validate(bundle.Rules, age, isStudent, income, null))
                 {
                     eligibleBundles.Add(enumerator.Current.Key);
                 }
