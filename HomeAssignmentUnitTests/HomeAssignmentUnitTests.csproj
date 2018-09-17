@@ -56,6 +56,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="BundleRecommendationUnitTests.cs" />
     <Compile Include="ConfigUnitTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rules\IncludeOneOfProductsRuleUnitTests.cs" />

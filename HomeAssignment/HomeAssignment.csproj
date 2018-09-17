@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Bundle.cs" />
     <Compile Include="BundleItem.cs" />
+    <Compile Include="BundleRecommendation.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="ProductItem.cs" />
     <Compile Include="Rules\IncludeOneOfProductsRule.cs" />

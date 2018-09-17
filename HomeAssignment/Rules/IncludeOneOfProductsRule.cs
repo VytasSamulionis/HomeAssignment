@@ -20,6 +20,10 @@ namespace HomeAssignment.Rules
 
         public override bool Validate()
         {
+            if (products == null || _productsList == null)
+            {
+                return false;
+            }
             for (int i = 0; i < products.Count; ++i)
             {
                 if (_productsList.Contains(products[i]))
